@@ -1,5 +1,4 @@
 import os
-import streamlit as st  
 from groq import Groq
 from dotenv import load_dotenv
 load_dotenv(dotenv_path='.env')
@@ -8,8 +7,7 @@ load_dotenv(dotenv_path='.env')
 load_dotenv()
 
 # Check if the API key is loaded correctly
-# API_KEY = os.getenv("GROQ_API")
-API_KEY = "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"
+API_KEY = os.getenv("GROQ_API")
 if API_KEY is None:
     raise ValueError("API key not found. Make sure it is defined in the .env file.")
  # For debugging purposes
