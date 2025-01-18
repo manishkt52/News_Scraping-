@@ -1,32 +1,30 @@
+# generate_mcqs.py
 import os
-from groq import Groq
+import google.generativeai as genai
 from dotenv import load_dotenv
-load_dotenv(dotenv_path='.env')
+import re
 
-# Load environment variables from the .env file
+# Load environment variables from .env file
 load_dotenv()
 
-# Check if the API key is loaded correctly
-API_KEY = os.getenv("GROQ_API")
-if API_KEY is None:
-    raise ValueError("API key not found. Make sure it is defined in the .env file.")
- # For debugging purposes
+# Retrieve the Gemini API key
+GEMINI_API_KEY = os.getenv("GEMINI_FLASH_API")
+genai.configure(api_key=GEMINI_API_KEY)
+
+# Initialize the Gemini model
 def output(prompt):
-# Create a Groq client using the API key loaded from .env
-    client = Groq(
-        api_key=API_KEY  # Load API key from .env
-    )
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
 
-    # Send a request to the LLaMA model
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        ],
-        model="llama-3.1-8b-instant",  # Specify the model
-    )
+    if response and response.candidates:
+        text_content = response.candidates[0].content.parts[0].text
+        output_text = text_content
+        # print(f'Response: {text_content}')
+    else:
+     print("No response or candidates found.")
 
-    # Print the response from the API
-    return(chat_completion.choices[0].message.content)
+    
+
+    return output_text
+
+# Function to generate MCQs using the Gemini model

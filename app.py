@@ -65,9 +65,17 @@ if st.button("Fetch News"):
         st.success("News fetched successfully!")
 
         # Summarizing headlines
-        prompt = f"""Summarise the given input text:\ninput text: {news_data}"""
+        prompt = f"""Summarise the given news in input text.
+
+        **input text: {news_data}
+
+        **Additional Notes :
+        1. Provide news in bullet points.
+        2. Differentiate news on basis of different categories.
+        """
         with st.spinner("Summarizing the news..."):
             answer = output(prompt)
+            print(answer)
 
         st.subheader("Summarized News")
         st.write(answer)
