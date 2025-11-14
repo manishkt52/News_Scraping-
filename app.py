@@ -33,7 +33,6 @@ st.sidebar.title("Suggested Links")
 suggested_links = [
     "https://www.indiatoday.in",
     "https://www.bbc.com/news",
-    "https://news.yahoo.com/",
     "https://www.firstpost.com/",
     "https://www.nytimes.com"
 ]
@@ -75,7 +74,7 @@ if st.button("Fetch News"):
         """
         with st.spinner("Summarizing the news..."):
             answer = output(prompt)
-            print(answer)
+            # print(answer)
 
         st.subheader("Summarized News")
         st.write(answer)

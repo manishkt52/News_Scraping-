@@ -13,7 +13,7 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialize the Gemini model
 def output(prompt):
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.5-flash")
     response = model.generate_content(prompt)
 
     if response and response.candidates:
